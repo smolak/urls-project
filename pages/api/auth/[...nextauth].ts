@@ -72,10 +72,7 @@ export default NextAuth({
               },
             });
           } else {
-            const isValid = await verifyPassword(
-              credentials.password,
-              maybeUser.password
-            );
+            const isValid = await verifyPassword(credentials.password, maybeUser.password);
 
             if (!isValid) {
               throw new Error("Invalid Credentials");
@@ -131,10 +128,7 @@ export default NextAuth({
           throw new Error("Unauthorized.");
         }
 
-        const isValid = await verifyPassword(
-          credentials.password,
-          maybeUser.password
-        );
+        const isValid = await verifyPassword(credentials.password, maybeUser.password);
 
         if (!isValid) {
           throw new Error("Invalid Credentials");

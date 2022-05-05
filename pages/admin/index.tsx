@@ -58,10 +58,7 @@ function Page() {
       <AdminLayout title="Users">
         {/* {/* Activity list (smallest breakpoint only) */}
         <div className=" sm:hidden">
-          <ul
-            role="list"
-            className="mt-2 divide-y divide-gray-200 overflow-hidden  sm:hidden"
-          >
+          <ul role="list" className="mt-2 divide-y divide-gray-200 overflow-hidden  sm:hidden">
             {usersQuery?.data &&
               usersQuery.data.map((user) => {
                 return (
@@ -74,9 +71,7 @@ function Page() {
                             <span>{user.name}</span>
                             <span
                               className={classNames(
-                                statusStyles[
-                                  user.emailVerified ? "true" : "false"
-                                ],
+                                statusStyles[user.emailVerified ? "true" : "false"],
                                 "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize"
                               )}
                             >
@@ -84,10 +79,7 @@ function Page() {
                             </span>
                           </span>
                         </span>
-                        <ChevronRightIcon
-                          className="flex-shrink-0 h-5 w-5 text-gray-400"
-                          aria-hidden="true"
-                        />
+                        <ChevronRightIcon className="flex-shrink-0 h-5 w-5 text-gray-400" aria-hidden="true" />
                       </span>
                     </a>
                   </li>
@@ -126,9 +118,7 @@ function Page() {
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                               <div className="flex">
                                 <a className="group inline-flex space-x-2 truncate text-sm">
-                                  <p className="text-gray-500 truncate group-hover:text-gray-900">
-                                    {user.email}
-                                  </p>
+                                  <p className="text-gray-500 truncate group-hover:text-gray-900">{user.email}</p>
                                 </a>
                               </div>
                             </td>
@@ -138,15 +128,11 @@ function Page() {
                             <td className="hidden px-6 py-4 whitespace-nowrap text-sm text-gray-500 md:block">
                               <span
                                 className={classNames(
-                                  statusStyles[
-                                    user.emailVerified ? "true" : "false"
-                                  ],
+                                  statusStyles[user.emailVerified ? "true" : "false"],
                                   "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize"
                                 )}
                               >
-                                {user.emailVerified
-                                  ? "Verified"
-                                  : "Not Verified"}
+                                {user.emailVerified ? "Verified" : "Not Verified"}
                               </span>
                             </td>
                             <td className="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">

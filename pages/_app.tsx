@@ -8,10 +8,7 @@ import WithAuth from "@lib/auth/WithAuth";
 
 export const queryClient = new QueryClient();
 
-function MyApp({
-  Component,
-  pageProps: { session, ...pageProps },
-}: ExtendedAppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: ExtendedAppProps) {
   return (
     <SessionProvider session={session} refetchInterval={5 * 60}>
       <QueryClientProvider client={queryClient}>

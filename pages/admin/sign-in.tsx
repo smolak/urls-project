@@ -43,11 +43,7 @@ export default function Page({ csrfToken }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center py-12">
-        <img
-          className="h-16 mx-auto"
-          src="/assets/planet-scale.svg"
-          alt="PlanetScale Logo"
-        />
+        <img className="h-16 mx-auto" src="/assets/planet-scale.svg" alt="PlanetScale Logo" />
       </div>
       <div className=" flex flex-col justify-center py-12 sm:px-6 lg:px-8 mt-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md text-center ">
@@ -56,18 +52,9 @@ export default function Page({ csrfToken }) {
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="py-8 px-4 mx-2 rounded-sm sm:px-10">
             <form className="text-center" onSubmit={handleSubmit(onSubmit)}>
-              <input
-                name="csrfToken"
-                {...register("csrfToken")}
-                type="hidden"
-                defaultValue={csrfToken}
-                hidden
-              />
+              <input name="csrfToken" {...register("csrfToken")} type="hidden" defaultValue={csrfToken} hidden />
               <div className="">
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-neutral-400"
-                >
+                <label htmlFor="email" className="block text-sm font-medium text-neutral-400">
                   Email address
                 </label>
                 <div className="mt-1">
@@ -85,10 +72,7 @@ export default function Page({ csrfToken }) {
 
               <div>
                 <div className="mt-8">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium text-neutral-400"
-                  >
+                  <label htmlFor="password" className="block text-sm font-medium text-neutral-400">
                     Password
                   </label>
                 </div>
@@ -112,11 +96,7 @@ export default function Page({ csrfToken }) {
                   disabled={isSubmitting}
                   className="button button__round button__md button__primary w-full"
                 >
-                  {isSubmitting ? (
-                    <img src="/assets/loading.svg" />
-                  ) : (
-                    <p>Sign In</p>
-                  )}
+                  {isSubmitting ? <img src="/assets/loading.svg" /> : <p>Sign In</p>}
                 </button>
               </div>
             </form>

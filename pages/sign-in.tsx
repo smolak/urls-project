@@ -1,11 +1,6 @@
 import { filter } from "lodash";
 import { GetServerSidePropsContext } from "next";
-import {
-  getSession,
-  getCsrfToken,
-  signIn,
-  getProviders,
-} from "next-auth/react";
+import { getSession, getCsrfToken, signIn, getProviders } from "next-auth/react";
 import Head from "next/head";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -52,38 +47,20 @@ export default function Page({ csrfToken, providers }) {
       </Head>
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center py-12">
         <a href="/">
-          <img
-            className="h-16 mx-auto"
-            src="/assets/planet-scale.svg"
-            alt="PlanetScale Logo"
-          />
+          <img className="h-16 mx-auto" src="/assets/planet-scale.svg" alt="PlanetScale Logo" />
         </a>
       </div>
       <div className=" flex flex-col justify-center sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-          <h1 className="text-xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate">
-            Sign In
-          </h1>
+          <h1 className="text-xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate">Sign In</h1>
           <h2>Sign in with an existing account, or create new account.</h2>
         </div>
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="py-8 px-4 mx-2 rounded-sm sm:px-10">
-            <form
-              className="text-center my-12"
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              <input
-                name="csrfToken"
-                {...register("csrfToken")}
-                type="hidden"
-                defaultValue={csrfToken}
-                hidden
-              />
+            <form className="text-center my-12" onSubmit={handleSubmit(onSubmit)}>
+              <input name="csrfToken" {...register("csrfToken")} type="hidden" defaultValue={csrfToken} hidden />
               <div className="">
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-neutral-400"
-                >
+                <label htmlFor="email" className="block text-sm font-medium text-neutral-400">
                   Email address
                 </label>
                 <div className="mt-1">
@@ -101,10 +78,7 @@ export default function Page({ csrfToken, providers }) {
 
               <div>
                 <div className="mt-8">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium text-neutral-400"
-                  >
+                  <label htmlFor="password" className="block text-sm font-medium text-neutral-400">
                     Password
                   </label>
                 </div>
@@ -123,16 +97,8 @@ export default function Page({ csrfToken, providers }) {
               </div>
 
               <div className="mt-6 space-y-2 flex justify-center">
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="button button__md button__primary w-full"
-                >
-                  {isSubmitting ? (
-                    <img src="/assets/loading.svg" />
-                  ) : (
-                    <p>Sign in</p>
-                  )}
+                <button type="submit" disabled={isSubmitting} className="button button__md button__primary w-full">
+                  {isSubmitting ? <img src="/assets/loading.svg" /> : <p>Sign in</p>}
                 </button>
               </div>
             </form>
@@ -153,10 +119,7 @@ export default function Page({ csrfToken, providers }) {
                       onClick={() => handleProviderSignIn(provider)}
                       className="button button__secondary inline-flex space-x-2"
                     >
-                      <img
-                        className="w-6 h-6"
-                        src={`/assets/${provider.id}.svg`}
-                      />
+                      <img className="w-6 h-6" src={`/assets/${provider.id}.svg`} />
                       <p>{provider.name}</p>
                     </button>
                   );

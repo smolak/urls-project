@@ -6,7 +6,7 @@ export type AuthenticatedPage = {
   redirectTo?: string; // redirect to this url
 };
 export type ExtendedPageProps = {
-  requiresAuth?: boolean
+  requiresAuth?: boolean;
   auth?: AuthenticatedPage;
   layout?: Component;
 };

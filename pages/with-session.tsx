@@ -49,15 +49,9 @@ const Page = () => {
     <>
       <AppLayout title="With Session">
         <div>
-          <h1>
-            Hello, {`${session.user.name ?? session.user.email}`} You can see
-            this because you're logged in.
-          </h1>
+          <h1>Hello, {`${session.user.name ?? session.user.email}`} You can see this because you're logged in.</h1>
           <blockquote>
-            <p>
-              This example shows usage with React Query and protected api
-              routes.
-            </p>
+            <p>This example shows usage with React Query and protected api routes.</p>
           </blockquote>
           {withSessionQuery?.data && <p>{withSessionQuery.data}</p>}
         </div>

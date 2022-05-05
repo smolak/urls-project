@@ -53,11 +53,7 @@ const AppLayout = (props) => {
                   type="button"
                   className="px-4 text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 "
                 >
-                  <img
-                    className="h-8 w-8 mx-auto"
-                    src="/assets/planet-scale.svg"
-                    alt="PlanetScale Logo"
-                  />
+                  <img className="h-8 w-8 mx-auto" src="/assets/planet-scale.svg" alt="PlanetScale Logo" />
                 </button>
                 <div className="flex-1 flex"></div>
                 <div className="ml-4 flex items-center md:ml-6">
@@ -65,11 +61,7 @@ const AppLayout = (props) => {
                     <div>
                       <Menu.Button className="max-w-xs bg-gray-100 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 p-2 lg:rounded-md lg:hover:bg-gray-50">
                         {session?.user?.image ? (
-                          <img
-                            className="h-6 w-6 rounded-full"
-                            src={session.user.image}
-                            alt="PlanetScale Logo"
-                          />
+                          <img className="h-6 w-6 rounded-full" src={session.user.image} alt="PlanetScale Logo" />
                         ) : (
                           <UserIcon className="h-6 w-6 rounded-full" />
                         )}
@@ -77,10 +69,7 @@ const AppLayout = (props) => {
                         <span className="hidden  text-gray-700 text-sm font-medium lg:block">
                           <span className="sr-only">Open user menu for </span>
                         </span>
-                        <ChevronDownIcon
-                          className="flex-shrink-0 h-5 w-5 text-gray-400"
-                          aria-hidden="true"
-                        />
+                        <ChevronDownIcon className="flex-shrink-0 h-5 w-5 text-gray-400" aria-hidden="true" />
                       </Menu.Button>
                     </div>
                     <Transition
@@ -140,9 +129,7 @@ const AppLayout = (props) => {
                             : " hover:border-b  hover:border-gray-200 text-gray-600 ",
                           "group flex items-center px-2 py-2 text-sm leading-6 font-medium"
                         )}
-                        aria-current={
-                          item.href === currentPath ? "page" : undefined
-                        }
+                        aria-current={item.href === currentPath ? "page" : undefined}
                       >
                         {item.title}
                       </a>
@@ -172,9 +159,7 @@ const AppLayout = (props) => {
             </div>
 
             <div className="mt-2">
-              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                {props.children}
-              </div>
+              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">{props.children}</div>
             </div>
           </main>
         </div>
