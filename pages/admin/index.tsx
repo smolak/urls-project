@@ -30,8 +30,9 @@ function Page() {
   }
 
   const usersQuery = useQuery(["users"], async () => {
-    const data = await superagent.get("/api/users").send({
-      select: {
+    // That's a temporary (famous last words) fix, as body is not send anymore via GET request
+    const data = await superagent.get("/api/users").query({
+      select: JSON.stringify({
         id: true,
         name: true,
         email: true,
@@ -43,7 +44,7 @@ function Page() {
             provider: true,
           },
         },
-      },
+      }),
     });
 
     return data.body;

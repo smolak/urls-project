@@ -13,14 +13,28 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  const selectInput = isEmpty(req.body?.select) ? undefined : req.body?.select;
-  const whereInput = isEmpty(req.body?.where) ? undefined : req.body?.where;
-  const includeInput = isEmpty(req.body?.include) ? undefined : req.body?.include;
-  const orderByInput = isEmpty(req.body?.orderBy) ? undefined : req.body?.orderBy;
-  const cursorInput = isEmpty(req.body?.cursor) ? undefined : req.body?.cursor;
-  const takeInput = isEmpty(req.body?.take) ? undefined : req.body?.take;
-  const skipInput = isEmpty(req.body?.skip) ? undefined : req.body?.skip;
-  const distinctInput = isEmpty(req.body?.distinct) ? undefined : req.body?.distinct;
+  let selectInput;
+  let whereInput;
+  let includeInput;
+  let orderByInput;
+  let cursorInput;
+  let takeInput;
+  let skipInput;
+  let distinctInput;
+
+  // That's a temporary (famous last words) fix, as body is not send anymore via GET request
+  if (req.method === "GET") {
+    selectInput = isEmpty(req.query?.select) ? undefined : JSON.parse(<string>req.query?.select);
+  } else {
+    selectInput = isEmpty(req.body?.select) ? undefined : req.body?.select;
+    whereInput = isEmpty(req.body?.where) ? undefined : req.body?.where;
+    includeInput = isEmpty(req.body?.include) ? undefined : req.body?.include;
+    orderByInput = isEmpty(req.body?.orderBy) ? undefined : req.body?.orderBy;
+    cursorInput = isEmpty(req.body?.cursor) ? undefined : req.body?.cursor;
+    takeInput = isEmpty(req.body?.take) ? undefined : req.body?.take;
+    skipInput = isEmpty(req.body?.skip) ? undefined : req.body?.skip;
+    distinctInput = isEmpty(req.body?.distinct) ? undefined : req.body?.distinct;
+  }
 
   const findManyArgs: Prisma.UserFindManyArgs = {
     select: selectInput,
@@ -35,6 +49,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     const users = await prisma.user.findMany(findManyArgs);
+
+    console.log({ users, findManyArgs, req: req.query });
 
     return res.status(200).json(users);
   } catch (error) {
