@@ -20,16 +20,16 @@ model Account {
     type                     String
     provider                 String
     providerAccountId        String
-    refresh_token            String? @db.VarChar(500)
-    access_token             String? @db.VarChar(500)
+    refresh_token            String?  @db.VarChar(500)
+    access_token             String?  @db.VarChar(500)
     refresh_token_expires_in Int?
     expires_at               Int?
     token_type               String?
     scope                    String?
-    id_token                 String? @db.Text
+    id_token                 String?  @db.VarChar(250)
     session_state            String?
     oauth_token_secret       String?
-    oauth_token              String?
+    oauth_token              String? @db.VarChar(250)
 
     user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -38,40 +38,62 @@ model Account {
 
 model Session {
     id           String   @id @default(cuid())
-    sessionToken String   @unique
+    sessionToken String   @unique @db.VarChar(250)
     expires      DateTime
     user         User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId       String?
 }
 
 model User {
-    id            String    @id @default(cuid())
-    createdAt     DateTime  @default(now())
-    updatedAt     DateTime  @updatedAt
+    id            String     @id @default(cuid())
+    createdAt     DateTime   @default(now())
+    updatedAt     DateTime   @updatedAt
     name          String?
-    email         String?   @unique
+    email         String?    @unique
     password      String?
     emailVerified DateTime?
     image         String?
-    role          String?   @default("user")
+    role          String?    @default("user")
     accounts      Account[]
     sessions      Session[]
+    urlQueue      UrlQueue[]
+}
+
+enum UrlQueueStatus {
+    NEW
+    ACCEPTED
+    REJECTED
+}
+
+model UrlQueue {
+    id           String         @id @default(cuid())
+    createdAt    DateTime       @default(now())
+    updatedAt    DateTime       @updatedAt
+    // Not unique here to fetch it even if it was potentially added to the Url table
+    // in order to update the data.
+    url          String         @db.VarChar(2000)
+    status       UrlQueueStatus
+    attemptCount Int            @db.UnsignedTinyInt
+    // User will be notified if something went wrong
+    // also it will be used later to populate the UserUrl table
+    user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId       String
 }
 
 model Url {
-    id String @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    url String
-    title String
+    id          String   @id @default(cuid())
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    url         String   @unique @db.VarChar(2000)
+    title       String
     description String
-    faviconUrl String
-    imageUrl String
+    faviconUrl  String   @db.VarChar(2000)
+    imageUrl    String   @db.VarChar(2000)
 }
 
 model VerificationToken {
     identifier String
-    token      String   @unique
+    token      String   @unique @db.VarChar(250)
     expires    DateTime
 
     @@unique([identifier, token])
