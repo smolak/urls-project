@@ -13,7 +13,7 @@ generator client {
 }
 
 model Account {
-    id                       String   @id @default(cuid())
+    id                       String   @id @default(uuid())
     createdAt                DateTime @default(now())
     updatedAt                DateTime @updatedAt
     userId                   String
@@ -29,7 +29,7 @@ model Account {
     id_token                 String?  @db.VarChar(250)
     session_state            String?
     oauth_token_secret       String?
-    oauth_token              String? @db.VarChar(250)
+    oauth_token              String?  @db.VarChar(250)
 
     user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -45,7 +45,7 @@ model Session {
 }
 
 model User {
-    id            String     @id @default(cuid())
+    id            String     @id @default(uuid())
     createdAt     DateTime   @default(now())
     updatedAt     DateTime   @updatedAt
     name          String?
@@ -66,7 +66,7 @@ enum UrlQueueStatus {
 }
 
 model UrlQueue {
-    id           String         @id @default(cuid())
+    id           String         @id
     createdAt    DateTime       @default(now())
     updatedAt    DateTime       @updatedAt
     // Not unique here to fetch it even if it was potentially added to the Url table
@@ -81,10 +81,13 @@ model UrlQueue {
 }
 
 model Url {
-    id          String   @id @default(cuid())
+    id          String   @id
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
-    url         String   @unique @db.VarChar(2000)
+    url         String   @db.VarChar(2000)
+    // Reserved for SHA1 hash - required as 2k long URLs will create too long index keys
+    // ones, that are too long for MySQL engine to even work
+    urlHash     String   @unique @db.Char(40)
     title       String
     description String
     faviconUrl  String   @db.VarChar(2000)
