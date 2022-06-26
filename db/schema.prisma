@@ -72,8 +72,8 @@ model UrlQueue {
     // Not unique here to fetch it even if it was potentially added to the Url table
     // in order to update the data.
     url          String         @db.VarChar(2000)
-    status       UrlQueueStatus
-    attemptCount Int            @db.UnsignedTinyInt
+    status       UrlQueueStatus @default(NEW)
+    attemptCount Int            @default(0) @db.UnsignedTinyInt
     // User will be notified if something went wrong
     // also it will be used later to populate the UserUrl table
     user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
